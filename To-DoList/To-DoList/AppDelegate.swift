@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Todo
-//
-//  Created by Tyler Lovett on 3/3/20.
-//  Copyright © 2020 BTEnterprises. All rights reserved.
-//
 
 import UIKit
 
