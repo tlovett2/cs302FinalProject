@@ -21,7 +21,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             MasterView(dates: $dates)
-                .navigationBarTitle(Text("Text"))
+                .navigationBarTitle(Text("Master"))
                 .navigationBarItems(
                     leading: EditButton(),
                     trailing: Button(
@@ -33,10 +33,7 @@ struct ContentView: View {
                     }
                 )
             DetailView()
-        }.padding().navigationViewStyle(DoubleColumnNavigationViewStyle()).background(/*@START_MENU_TOKEN@*/Color.red
-            .accentColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)/*@END_MENU_TOKEN@*/).alert(isPresented: /*@START_MENU_TOKEN@*/ /*@PLACEHOLDER=Is Presented@*/.constant(false)/*@END_MENU_TOKEN@*/) {
-            /*@START_MENU_TOKEN@*/ /*@PLACEHOLDER=Content@*/Alert(title: Text("Alert"))/*@END_MENU_TOKEN@*/
-        }
+        }.navigationViewStyle(DoubleColumnNavigationViewStyle())
     }
 }
 
