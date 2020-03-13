@@ -3,11 +3,11 @@
 #include <string>
 #include <sstream>
 #include <ctime>
-#define EST (-5)
 
 using namespace std;
 
 class Node {
+    //possibly add a date to be completed by
   public: 
    string task;
    string time; 
@@ -23,6 +23,7 @@ class tasks {
    void edit_task(string &, string &);
    void clear_tasks();
    void print_tasks();
+   void help();
   private:
    list <Node *> all_tasks;
 };
@@ -39,6 +40,7 @@ tasks::~tasks()
 
 void tasks::add_task(string &s)
 {
+    //add a to be completed by date would ask for when getting input for task;
   time_t rawtime;
   struct tm * timeinfo;
   time (&rawtime);
@@ -120,7 +122,28 @@ void tasks::clear_tasks()
 
 void tasks::print_tasks()
 {
+    if(all_tasks.empty()) {cout << "All tasks completed.\n"; return;}
+    list<Node *>::const_iterator it;
+    cout << "Current tasks:\n";
+    int i = 1;
+    for(it = all_tasks.begin(); it != all_tasks.end(); it++) {
+        printf("Task %d: %s\nDate created: %s", i, (*it)->task.c_str(), (*it)->time.c_str());
+        i++;
+    }
+}
+
+void tasks::help()
+{
+    cout << "Possible commands:\n";
+    cout << "Help -- shows possible commands\n";
+    cout << "Add -- adds a task -- enter add then prompt will then ask you to input task\n";
+    cout << "Delete -- deletes task(case does not matter) -- enter delete then prompt will for task to delete\n";
+    cout << "Edit -- edit a currently existing task -- enter edit then prompt will ask for old task and new task\n";
+    cout << "Print -- prints all tasks\n";
+    cout << "Clear -- clears all tasks\n";
+    cout << "Quit -- exits the program\n";
     
+    cout << "**Note case for commands does not matter**\n";
 }
 
 int main()
@@ -132,8 +155,8 @@ int main()
       
     cout << "Enter command:\n" << '>';
     cin >> s;
-    if("Help" == s || "help" == s) {
-          
+    if("Help" == s || "help" == s || "HELP" == s) {
+        tsk.help();
     }
     else if("Add" == s || "add" == s || "ADD" == s) {
       cout << "Enter new task:\n>";
