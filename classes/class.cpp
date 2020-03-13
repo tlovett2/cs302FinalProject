@@ -160,22 +160,20 @@ int main()
     }
     else if("Add" == s || "add" == s || "ADD" == s) {
       cout << "Enter new task:\n>";
-      while(cin >> s){
-          getline(cin, str);
-          
-          s.append(str);
-          break;
-      }
+      
+      cin >> s;
+      getline(cin, str);
+      s.append(str);
+        
       tsk.add_task(s);
     }
     else if("Delete" == s || "delete" == s || "DELETE" == s) {
       cout << "Enter task to delete:\n>";
-      while(cin >> s){
-          getline(cin, str);
-          
-          s.append(str);
-          break;
-      }
+
+      cin >> s;
+      getline(cin,str);
+      s.append(str);
+      
       tsk.remove_task(s);
     }
     else if("Quit" == s || "quit" == s || "QUIT" == s) {
@@ -187,20 +185,17 @@ int main()
     else if("Edit" == s || "edit" == s || "EDIT" == s) {
       string org_tsk,new_tsk;
       cout << "Enter original task:\n>";
-      while(cin >> org_tsk){
-          getline(cin, str);
-          
-          org_tsk.append(str);
-          break;
-      }
+      
+      cin >> org_tsk;
+      getline(cin, str);
+      org_tsk.append(str);
+
         
       cout << "Enter edited task:\n>";
-      while(cin >> new_tsk){
-          getline(cin, str);
-            
-          new_tsk.append(str);
-          break;
-      }
+      cin >> new_tsk;
+      getline(cin, str);
+      new_tsk.append(str);
+        
       tsk.edit_task(org_tsk,new_tsk);
     }
     else if("Print" == s || "print" == s || "PRINT" == s) {
