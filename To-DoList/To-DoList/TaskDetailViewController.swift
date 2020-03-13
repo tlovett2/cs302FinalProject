@@ -11,7 +11,10 @@ class TaskDetailViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "doneWithSegue:" {
+        print("Hey")
+        if segue.identifier == "doneSegue" {
+            print(taskName.text!)
+            print("Boss")
             name = taskName.text!
         }
     }

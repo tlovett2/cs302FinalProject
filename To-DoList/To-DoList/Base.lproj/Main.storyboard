@@ -10,27 +10,28 @@
         <!--Tasks-->
         <scene sceneID="PfF-nL-lWL">
             <objects>
-                <tableViewController id="s6r-c1-J06" customClass="TaskListViewController" customModule="To_Do_List" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="s6r-c1-J06" customClass="TaskListViewController" customModule="To_Do_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jD8-yV-QSf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" id="9vE-xi-ogG">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" showsReorderControl="YES" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="taskCell" editingAccessoryType="disclosureIndicator" id="9vE-xi-ogG">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9vE-xi-ogG" id="GFu-EV-3gV">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="370" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="s6r-c1-J06" id="pmu-si-VfX"/>
-                            <outlet property="delegate" destination="s6r-c1-J06" id="XFr-ob-EXc"/>
+                            <outlet property="dataSource" destination="s6r-c1-J06" id="2I6-FP-78h"/>
+                            <outlet property="delegate" destination="s6r-c1-J06" id="9s9-5Z-1fL"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tasks" id="n8e-RV-wHh">
+                        <barButtonItem key="leftBarButtonItem" image="square.and.pencil" catalog="system" largeContentSizeImage="square.and.pencil" id="jQJ-bs-QcA"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="DxW-4s-r2k">
                             <connections>
                                 <segue destination="aUD-l0-Jlm" kind="presentation" id="K6k-1p-gja"/>
@@ -57,32 +58,37 @@
                                     <navigationItem title="Add task" id="Dx0-o5-Oqn">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ojS-ns-G7z">
                                             <connections>
+                                                <action selector="cancelWithSegue:" destination="5iQ-ci-bH7" id="qng-kz-DvC"/>
                                                 <segue destination="DU4-A5-if2" kind="unwind" unwindAction="cancelWithSegue:" id="t5N-vL-69T"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="aBe-mJ-jbx">
                                             <connections>
-                                                <segue destination="DU4-A5-if2" kind="unwind" unwindAction="doneWithSegue:" id="NzR-jf-thv"/>
+                                                <action selector="doneWithSegue:" destination="5iQ-ci-bH7" id="OyU-3V-MXU"/>
+                                                <segue destination="DU4-A5-if2" kind="unwind" identifier="doneSegue" unwindAction="doneWithSegue:" id="Jwr-Zw-8Vh"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ckE-HM-9Ah">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ckE-HM-9Ah">
                                 <rect key="frame" x="20" y="84" width="374" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="yes" smartInsertDeleteType="no"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="jCb-wq-8vj"/>
                     </view>
+                    <connections>
+                        <outlet property="taskName" destination="ckE-HM-9Ah" id="cuR-6q-gVz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5iQ-ci-bH7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="DU4-A5-if2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1035" y="129"/>
+            <point key="canvasLocation" x="1034.7826086956522" y="128.57142857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="swr-wE-QHw">
@@ -101,4 +107,7 @@
             <point key="canvasLocation" x="-779" y="129"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="square.and.pencil" catalog="system" width="64" height="58"/>
+    </resources>
 </document>

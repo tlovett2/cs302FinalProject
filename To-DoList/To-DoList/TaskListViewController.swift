@@ -3,7 +3,7 @@ import UIKit
 
 class TaskListViewController: UITableViewController {
     var tasks = [String]()
-    var newtask: String = ""
+    var newTask: String = ""
     
     @IBAction func cancel(segue:UIStoryboardSegue) {
        
@@ -11,9 +11,9 @@ class TaskListViewController: UITableViewController {
 
     @IBAction func done(segue:UIStoryboardSegue) {
          let taskDetailVC = segue.source as! TaskDetailViewController
-         newtask = taskDetailVC.name
-          
-         tasks.append(newtask)
+         newTask = taskDetailVC.name
+          print(newTask)
+         tasks.append(newTask)
          tableView.reloadData()
     }
 
