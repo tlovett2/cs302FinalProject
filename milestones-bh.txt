@@ -1,0 +1,16 @@
+Time Log:
+20mins - group - setting up git and learning how the Xcode environment works
+120mins - learning how to use Xcode, swift, and c++ with a U/I
+120mins - learning swift
+120mins - writing c++ example version of to-do list
+
+Rubric:
+Actually compiles 	20%
+
+App can perform basic intended operations e.g. adding tasks, etc. 40%
+
+Can actually be uploaded to a phone not just a simulation 20% 
+
+The app runs smoothly 		10%
+
+The app meets promised features 10%
