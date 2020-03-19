@@ -1,0 +1,25 @@
+Final project -- To-Do by Tyler Lovett and Braxton Haynie
+Date: 03/13/20
+Git repo: https://github.com/tlovett2/cs302FinalProject.git
+Task completed: I wrote the example c++ code for the project.
+I wrote this so we could have an example how the program would work as
+to have a fall back plan in the event we cannot figure out how to use
+Swift and Xcode.
+
+Time Log:
+20mins - group - setting up git and learning how the Xcode environment works
+120mins - learning how to use Xcode, swift, and c++ with a U/I
+120mins - learning swift
+120mins - writing c++ example version of to-do list
+30mins - finished c++ example of list
+
+Rubric:
+Actually compiles 	20%
+
+App can perform basic intended operations e.g. adding tasks, etc. 40%
+
+Can actually be uploaded to a phone not just a simulation 20% 
+
+The app runs smoothly 		10%
+
+The app meets promised features 10%
