@@ -3,17 +3,23 @@ import UIKit
 
 class TaskDetailViewController: UIViewController {
    
-
-   @IBOutlet weak var Reminder_Outlet: UISwitch!
-   @IBAction func switch_Remider(_ sender: UISwitch) {
+    @IBOutlet weak var Reminder_Date: UIDatePicker!
+        
+    @IBAction func hideReminderDate(_ sender: UIDatePicker) {
+        
+    }
+    
+    
+    @IBOutlet weak var Reminder_Outlet: UISwitch!
+    @IBAction func switch_Remider(_ sender: UISwitch) {
        
-       if Reminder_Outlet.isOn {
-           print("on\n")
-       }
-       else {
-           print("wassup\n");
-       }
-   }
+        if Reminder_Outlet.isOn {
+            Reminder_Date.isHidden = false;
+        }
+        else {
+            Reminder_Date.isHidden = true;
+        }
+    }
     
     @IBOutlet weak var Completion_Date: UIDatePicker!
     @IBAction func Date_Picker(_ sender: UIDatePicker) {
