@@ -7,6 +7,24 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Task View-->
+        <scene sceneID="GKH-Gj-5Q2">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nHq-s2-ESZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="jl1-vG-y3G" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J6M-Jb-4Ab">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="kps-EE-Myv"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Task View" id="3sD-E6-tuo">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="LsW-Vh-2wP"/>
+                    </navigationItem>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="-607.36607142857144"/>
+        </scene>
         <!--Tasks-->
         <scene sceneID="PfF-nL-lWL">
             <objects>
@@ -23,6 +41,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="370" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="jl1-vG-y3G" kind="show" id="T0k-Rd-26k"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
