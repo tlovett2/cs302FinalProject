@@ -10,7 +10,7 @@ class TaskListViewController: UITableViewController {
     }
 
     @IBAction func done(segue:UIStoryboardSegue) {
-         let taskDetailVC = segue.source as! TaskDetailViewController
+         let taskDetailVC = segue.source as! AddTask
          newTask = taskDetailVC.name
           print(newTask)
          tasks.append(newTask)
@@ -20,7 +20,7 @@ class TaskListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tasks = ["Default Task"]
+        tasks = []
     }
 
     // MARK: - Table view data source

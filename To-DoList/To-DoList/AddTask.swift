@@ -1,7 +1,7 @@
 
 import UIKit
 
-class TaskDetailViewController: UIViewController {
+class AddTask: UIViewController {
    
     @IBOutlet weak var Reminder_Date: UIDatePicker!
         

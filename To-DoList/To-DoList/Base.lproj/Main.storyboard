@@ -7,23 +7,120 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Task View-->
+        <!--View Task-->
         <scene sceneID="GKH-Gj-5Q2">
             <objects>
-                <viewController id="jl1-vG-y3G" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="J6M-Jb-4Ab">
+                <viewController title="View Task" id="jl1-vG-y3G" customClass="ViewTask" customModule="To_Do_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <textField key="view" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="XXo-Gw-bAs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="kps-EE-Myv"/>
-                    </view>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <action selector="cancelWithSegue:" destination="jl1-vG-y3G" eventType="editingDidEnd" id="7cp-FP-HxG"/>
+                            <action selector="doneWithSegue:" destination="jl1-vG-y3G" eventType="editingDidEnd" id="2WP-6x-BQK"/>
+                        </connections>
+                    </textField>
                     <navigationItem key="navigationItem" title="Task View" id="3sD-E6-tuo">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="LsW-Vh-2wP"/>
+                        <barButtonItem key="backBarButtonItem" title="Tasks" id="3Al-Ll-Dk6"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="LsW-Vh-2wP">
+                            <connections>
+                                <segue destination="4eE-mp-6yK" kind="showDetail" id="QSH-2i-L93"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nHq-s2-ESZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="-607.36607142857144"/>
+        </scene>
+        <!--Edit Task-->
+        <scene sceneID="dS2-At-TTn">
+            <objects>
+                <viewController title="Edit Task" id="4eE-mp-6yK" customClass="EditTask" customModule="To_Do_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rba-Gh-VaO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hye-9B-AoB">
+                                <rect key="frame" x="20" y="121" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter Completion Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2b-0b-ZvL">
+                                <rect key="frame" x="20" y="163" width="173" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDD-wh-B7g">
+                                <rect key="frame" x="20" y="431" width="104" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="beD-hD-imh">
+                                <rect key="frame" x="0.0" y="470" width="414" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="hideReminderDate2:" destination="4eE-mp-6yK" eventType="valueChanged" id="HRi-Ng-1PW"/>
+                                </connections>
+                            </datePicker>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Eou-ha-z9p" userLabel="Reminder Outlet2">
+                                <rect key="frame" x="312" y="431" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="switch_Remider2:" destination="4eE-mp-6yK" eventType="valueChanged" id="uoc-kw-CyP"/>
+                                    <action selector="switch_Remider:" destination="4eE-mp-6yK" eventType="valueChanged" id="dLX-5i-7cC"/>
+                                </connections>
+                            </switch>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="NJj-rb-kpC">
+                                <rect key="frame" x="0.0" y="207" width="414" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="Date_Picker2:" destination="4eE-mp-6yK" eventType="valueChanged" id="emY-n4-VWS"/>
+                                </connections>
+                            </datePicker>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="meK-sE-IqI">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="u4u-2l-BQO">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="9Ir-Y6-QdV">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Y6n-RY-Iiy">
+                                                <rect key="frame" x="20" y="13" width="92" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Cancel"/>
+                                            </button>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="VOd-Aj-bKW">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jbv-qK-ALK">
+                                                <rect key="frame" x="302" y="13" width="92" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Done"/>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="wUG-Q1-IE6"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1BM-gw-2em"/>
+                    <connections>
+                        <outlet property="Completion_Date2" destination="NJj-rb-kpC" id="XDy-Id-e5X"/>
+                        <outlet property="Reminder_Date2" destination="beD-hD-imh" id="xiL-8X-CAh"/>
+                        <outlet property="Reminder_Outlet2" destination="Eou-ha-z9p" id="yJF-54-oHo"/>
+                        <outlet property="taskName2" destination="Hye-9B-AoB" id="DZk-8N-8Bm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YJt-YK-6iF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1035" y="-607"/>
         </scene>
         <!--Tasks-->
         <scene sceneID="PfF-nL-lWL">
@@ -64,10 +161,10 @@
             </objects>
             <point key="canvasLocation" x="140" y="129"/>
         </scene>
-        <!--Task Detail View Controller-->
+        <!--Add Task-->
         <scene sceneID="prU-i8-Apx">
             <objects>
-                <viewController id="aUD-l0-Jlm" customClass="TaskDetailViewController" customModule="To_Do_List" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Task" id="aUD-l0-Jlm" customClass="AddTask" customModule="To_Do_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uAh-Rl-DUB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
