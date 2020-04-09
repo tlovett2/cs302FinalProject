@@ -1,9 +1,13 @@
 
 import UIKit
 
+
+
 class TaskListViewController: UITableViewController {
-    var tasks = [String]()
+    //var tasks = [String]()
     var newTask: String = ""
+    var index: Int = 0
+    var tasks = [String]()
     
     @IBAction func cancel(segue:UIStoryboardSegue) {
        
@@ -16,7 +20,25 @@ class TaskListViewController: UITableViewController {
          tasks.append(newTask)
          tableView.reloadData()
     }
+    
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "Viewer") {
+            var tk = segue.destination as! ViewTask
+            
+            func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                index = indexPath.row
+                //print("row: \(indexPath.row)")
+            
+            }
+            print("\(index)")
+            //tk.cur_task = tasks[]
+            
+            
+        }
+    }
 
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +67,8 @@ class TaskListViewController: UITableViewController {
     }
     
 
+   
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

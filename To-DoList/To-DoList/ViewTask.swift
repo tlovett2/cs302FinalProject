@@ -8,7 +8,10 @@
 
 import UIKit
 
+
 class ViewTask: UIViewController {
     
-
+    var cur_task = ""
+    
 }
+

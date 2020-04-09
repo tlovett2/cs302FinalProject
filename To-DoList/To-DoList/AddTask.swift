@@ -36,10 +36,9 @@ class AddTask: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("Hey")
         if segue.identifier == "doneSegue" {
             print(taskName.text!)
-            print("Boss")
+
             name = taskName.text!
         }
     }
