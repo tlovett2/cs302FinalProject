@@ -49,10 +49,11 @@ class ViewTask: UIViewController {
             rem.sizeToFit();
             rd.text = rem_date
             rd.sizeToFit();
-            rd.frame.origin = CGPoint(x: screenWidth/2 - (doc.bounds.size.width / 2), y: screenHeight/2)
+            rd.frame.origin = CGPoint(x: screenWidth/2 - (rd.bounds.size.width / 2), y: screenHeight/1.75)
         }
         
     }
+   
     
     
 }

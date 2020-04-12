@@ -42,12 +42,12 @@ class EditTask: UIViewController {
            super.viewDidLoad()
     }
        
-       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
            print("Hey")
            if segue.identifier == "doneSegue" {
                print(taskName2.text!)
                print("Boss")
                name = taskName2.text!
            }
-       }
+    }
 }

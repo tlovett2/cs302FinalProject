@@ -11,7 +11,7 @@ class AddTask: UIViewController {
     @IBAction func hideReminderDate(_ sender: UIDatePicker) {
         Reminder_Date.datePickerMode = UIDatePicker.Mode.dateAndTime
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM yyyy HH mm"
+        dateFormatter.dateFormat = "dd MMMM yyyy h:mm a"
         rem_date = String(dateFormatter.string(from: Reminder_Date.date))
         print(rem_date!)
         
@@ -21,11 +21,17 @@ class AddTask: UIViewController {
     @IBOutlet weak var Reminder_Outlet: UISwitch!
     @IBAction func switch_Remider(_ sender: UISwitch) {
        
-        if Reminder_Outlet.isOn {
-            Reminder_Date.isHidden = false;
+        if Reminder_Outlet.isOn == false {
+            Reminder_Date.isHidden = true;
+            rem_date = nil
         }
         else {
-            Reminder_Date.isHidden = true;
+            Reminder_Date.isHidden = false;
+            let date = Date()
+            let Form = DateFormatter()
+            Form.dateFormat = "dd MMMM yyyy"
+            let result = Form.string(from: date)
+            rem_date = result;
         }
     }
     
@@ -37,7 +43,6 @@ class AddTask: UIViewController {
         dateFormatter.dateFormat = "dd MMMM yyyy"
         com_date = String(dateFormatter.string(from: Completion_Date.date))
 
-        
         print(com_date!)
         
     }
@@ -55,7 +60,8 @@ class AddTask: UIViewController {
         Form.dateFormat = "dd MMMM yyyy"
         let result = Form.string(from: date)
         com_date = result
-        
+        Reminder_Outlet.isOn = false;
+        Reminder_Date.isHidden = true;
         
     }
     
