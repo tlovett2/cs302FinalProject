@@ -1,25 +1,39 @@
 
 import UIKit
 
-
+struct aTask {
+    init() {
+        task = ""
+        com_date = ""
+        rem_date = ""
+    }
+    var task: String
+    var com_date: String
+    var rem_date: String
+}
 
 class TaskListViewController: UITableViewController {
-    //var tasks = [String]()
     var newTask: String = ""
     var index: Int = 0
-    var tasks = [String]()
+    var tasks = [aTask]()
     var tk: ViewTask!
+    
     
     @IBAction func cancel(segue:UIStoryboardSegue) {
        
     }
 
     @IBAction func done(segue:UIStoryboardSegue) {
-         let taskDetailVC = segue.source as! AddTask
-         newTask = taskDetailVC.name
-          print(newTask)
-         tasks.append(newTask)
-         tableView.reloadData()
+        var t = aTask()
+        let taskDetailVC = segue.source as! AddTask
+        t.task = taskDetailVC.name
+        t.com_date = taskDetailVC.com_date
+        if taskDetailVC.rem_date != nil {
+            t.rem_date = taskDetailVC.rem_date
+        }
+        
+        tasks.append(t)
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -27,19 +41,16 @@ class TaskListViewController: UITableViewController {
         print("row: \(indexPath.row)")
         index = indexPath.row;
         
-        tk.cur_task = tasks[index]
+        tk.cur_task = tasks[index].task
+        tk.com_date = tasks[index].com_date
+        tk.rem_date = tasks[index].rem_date
         print("index: \(index)\ntk: \(tk.cur_task)\n")
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "Viewer") {
             tk = segue.destination as! ViewTask
-            
-            print("\(index)")
-            
-            
-            
-            
         }
     }
     
@@ -65,7 +76,7 @@ class TaskListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
 
-        cell.textLabel?.text = tasks[indexPath.row]
+        cell.textLabel?.text = tasks[indexPath.row].task
 
         return cell
     }

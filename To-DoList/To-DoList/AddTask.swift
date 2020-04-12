@@ -2,10 +2,18 @@
 import UIKit
 
 class AddTask: UIViewController {
-   
+    var rem_date: String!
+    var com_date: String!
+    
+    
     @IBOutlet weak var Reminder_Date: UIDatePicker!
         
     @IBAction func hideReminderDate(_ sender: UIDatePicker) {
+        Reminder_Date.datePickerMode = UIDatePicker.Mode.dateAndTime
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy HH mm"
+        rem_date = String(dateFormatter.string(from: Reminder_Date.date))
+        print(rem_date!)
         
     }
     
@@ -24,6 +32,13 @@ class AddTask: UIViewController {
     @IBOutlet weak var Completion_Date: UIDatePicker!
     @IBAction func Date_Picker(_ sender: UIDatePicker) {
         
+        Completion_Date.datePickerMode = UIDatePicker.Mode.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        com_date = String(dateFormatter.string(from: Completion_Date.date))
+
+        
+        print(com_date!)
         
     }
     
@@ -33,13 +48,22 @@ class AddTask: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Completion_Date.minimumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
+        Reminder_Date.minimumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
+        let date = Date()
+        let Form = DateFormatter()
+        Form.dateFormat = "dd MMMM yyyy"
+        let result = Form.string(from: date)
+        com_date = result
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "doneSegue" {
             print(taskName.text!)
-
             name = taskName.text!
+            
         }
     }
     
