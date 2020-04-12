@@ -8,6 +8,7 @@ class TaskListViewController: UITableViewController {
     var newTask: String = ""
     var index: Int = 0
     var tasks = [String]()
+    var tk: ViewTask!
     
     @IBAction func cancel(segue:UIStoryboardSegue) {
        
@@ -21,27 +22,30 @@ class TaskListViewController: UITableViewController {
          tableView.reloadData()
     }
     
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("section: \(indexPath.section)")
+        print("row: \(indexPath.row)")
+        index = indexPath.row;
+        
+        tk.cur_task = tasks[index]
+        print("index: \(index)\ntk: \(tk.cur_task)\n")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "Viewer") {
-            var tk = segue.destination as! ViewTask
+            tk = segue.destination as! ViewTask
             
-            func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                index = indexPath.row
-                //print("row: \(indexPath.row)")
-            
-            }
             print("\(index)")
-            //tk.cur_task = tasks[]
+            
+            
             
             
         }
     }
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tasks = []
     }
 
