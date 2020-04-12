@@ -7,8 +7,17 @@
 //
 import UIKit
 
-class EditTask: UIViewController {
 
+//if date is changed it will be newcomDate
+
+
+class EditTask: UIViewController {
+    var rem_date = ""
+    var task = ""
+    var newcomDate = ""
+    var newTask = ""
+    
+    
     
     @IBOutlet weak var Reminder_Date2: UIDatePicker!
         
@@ -31,23 +40,51 @@ class EditTask: UIViewController {
     @IBOutlet weak var Completion_Date2: UIDatePicker!
     @IBAction func Date_Picker2(_ sender: UIDatePicker) {
         
-        
+        Completion_Date2.datePickerMode = UIDatePicker.Mode.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        newcomDate = String(dateFormatter.string(from: Completion_Date2.date))
+
+        print(newcomDate)
     }
     
     @IBOutlet weak var taskName2: UITextField!
     
-    var name:String = ""
-    
-    override func viewDidLoad() {
-           super.viewDidLoad()
-    }
-       
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           print("Hey")
            if segue.identifier == "doneSegue" {
                print(taskName2.text!)
-               print("Boss")
-               name = taskName2.text!
+               newTask = taskName2.text!
            }
     }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        taskName2.text = task
+        
+        Completion_Date2.minimumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
+        Reminder_Date2.minimumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
+        
+        let Form = DateFormatter()
+        Form.dateFormat =  "dd MMMM yyyy"
+        var date = Form.date(from: newcomDate)
+        Completion_Date2.setDate(date!, animated: true)
+        
+        if(rem_date != "") {
+            Reminder_Date2.isHidden = false
+            Reminder_Outlet2.isOn = true;
+            Form.dateFormat = "dd MMMM yyyy h:mm a"
+            date = Form.date(from: rem_date)
+            Reminder_Date2.setDate(date!, animated: true)
+        }
+        else {
+            Reminder_Date2.isHidden = true
+            Reminder_Outlet2.isOn = false
+        }
+        
+        
+    }
+       
+
 }

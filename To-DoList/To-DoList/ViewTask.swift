@@ -10,7 +10,8 @@ import UIKit
 
 
 class ViewTask: UIViewController {
-    
+    var edit: EditTask!
+    var new_task = ""
     var cur_task = ""
     var com_date = ""
     var rem_date = ""
@@ -54,7 +55,31 @@ class ViewTask: UIViewController {
         
     }
    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "Editor") {
+            edit = segue.destination as! EditTask
+            
+            edit.newcomDate = com_date
+            edit.rem_date = rem_date
+            edit.task = cur_task
+            
+        }
+    }
     
+    @IBAction func cancel(segue:UIStoryboardSegue) {
+       
+    }
+
+    @IBAction func done(segue:UIStoryboardSegue) {
+        let taskDetailVC = segue.source as! EditTask
+        new_task = taskDetailVC.task
+        com_date = taskDetailVC.newcomDate
+        if taskDetailVC.rem_date != "" {
+            rem_date = taskDetailVC.rem_date
+        }
+        
+        
+    }
     
 }
 

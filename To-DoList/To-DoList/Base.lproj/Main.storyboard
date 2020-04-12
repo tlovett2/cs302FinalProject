@@ -58,7 +58,7 @@
                         <barButtonItem key="backBarButtonItem" title="Tasks" id="3Al-Ll-Dk6"/>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="LsW-Vh-2wP">
                             <connections>
-                                <segue destination="4eE-mp-6yK" kind="showDetail" id="QSH-2i-L93"/>
+                                <segue destination="4eE-mp-6yK" kind="showDetail" identifier="Editor" id="QSH-2i-L93"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -145,7 +145,7 @@
                                     <action selector="switch_Remider2:" destination="4eE-mp-6yK" eventType="valueChanged" id="BGe-62-80H"/>
                                 </connections>
                             </switch>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="NJj-rb-kpC">
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="NJj-rb-kpC">
                                 <rect key="frame" x="0.0" y="177" width="414" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
