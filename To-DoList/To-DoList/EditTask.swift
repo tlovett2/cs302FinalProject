@@ -55,10 +55,11 @@ class EditTask: UIViewController {
     @IBOutlet weak var taskName2: UITextField!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           if segue.identifier == "doneEdit" {
-               print(taskName2.text!)
-               newTask = taskName2.text!
-           }
+        if segue.identifier == "doneEdit" {
+            print(taskName2.text!)
+            newTask = taskName2.text!
+        }
+        
     }
     
     
@@ -89,8 +90,5 @@ class EditTask: UIViewController {
         
         
     }
-    
-    
-    
     
 }

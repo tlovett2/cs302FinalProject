@@ -6,10 +6,12 @@ struct aTask {
         task = ""
         com_date = ""
         rem_date = ""
+        completed = false
     }
     var task: String
     var com_date: String
     var rem_date: String
+    var completed: Bool
 }
 
 class TaskListViewController: UITableViewController {
@@ -24,34 +26,48 @@ class TaskListViewController: UITableViewController {
     }
 
     @IBAction func done(segue:UIStoryboardSegue) {
-        var t = aTask()
-        let taskDetailVC = segue.source as! AddTask
-        t.task = taskDetailVC.name
-        t.com_date = taskDetailVC.com_date
-        if taskDetailVC.rem_date != nil {
-            t.rem_date = taskDetailVC.rem_date
+        
+        if segue.identifier == "donewithView" {
+            var t = aTask()
+            let tsk = segue.source as! ViewTask
+            index = tsk.index
+            t.task = tsk.cur_task
+            t.com_date = tsk.com_date
+            t.rem_date = tsk.rem_date
+            t.completed = false
+            tasks[index] = t
+            tableView.reloadData()
+        }
+        else {
+            var t = aTask()
+            let taskDetailVC = segue.source as! AddTask
+            t.task = taskDetailVC.name
+            t.com_date = taskDetailVC.com_date
+            if taskDetailVC.rem_date != nil {
+                t.rem_date = taskDetailVC.rem_date
+            }
+            
+            //add completion---------------------
+            
+            tasks.append(t)
+            tableView.reloadData()
         }
         
-        tasks.append(t)
-        tableView.reloadData()
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("section: \(indexPath.section)")
-        print("row: \(indexPath.row)")
-        index = indexPath.row;
-        
-        tk.cur_task = tasks[index].task
-        tk.com_date = tasks[index].com_date
-        tk.rem_date = tasks[index].rem_date
-        print("index: \(index)\ntk: \(tk.cur_task)\n")
-        
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "Viewer") {
+        if (segue.identifier == "view") {
             tk = segue.destination as! ViewTask
+            tk.cur_task = tasks[index].task
+            tk.com_date = tasks[index].com_date
+            tk.rem_date = tasks[index].rem_date
+            tk.completed = tasks[index].completed
+            //ADD COMPLETION BOOL TO VIEWTASK FILE_________________________
+            
+            tk.index = index
         }
+        
     }
     
     override func viewDidLoad() {
@@ -72,12 +88,24 @@ class TaskListViewController: UITableViewController {
         return tasks.count
     }
 
+    @IBAction func Completion(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 1 {
+            sender.backgroundColor = UIColor.green
+            
+        }
+        else {
+            sender.backgroundColor = UIColor.red
+        }
+        
+    }
+    
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
 
         cell.textLabel?.text = tasks[indexPath.row].task
-
+        
         return cell
     }
     

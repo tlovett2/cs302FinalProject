@@ -8,20 +8,31 @@
 
 import UIKit
 
-
 class ViewTask: UIViewController {
     var edit: EditTask!
     var cur_task = ""
     var com_date = ""
     var rem_date = ""
+    var completed = false
+    
+    var index: Int!
+    var t = aTask()
     
     func printtsk(string: String) {
         print("\(cur_task)\n")
        
     }
     
+    @IBOutlet weak var percentage: UISlider!
+    
+    @IBAction func perChange(_ sender: Any) {
+        
+        
+    }
+    
     
     @IBOutlet weak var thetask: UILabel!
+    @IBOutlet weak var status: UILabel!
     @IBOutlet weak var doc: UILabel!
     @IBOutlet weak var rem: UILabel!
     @IBOutlet weak var rd: UILabel!
@@ -36,6 +47,10 @@ class ViewTask: UIViewController {
         thetask.text = cur_task
         thetask.sizeToFit();
         thetask.frame.origin = CGPoint(x: screenWidth/2 - (thetask.bounds.size.width / 2), y: screenHeight/8)
+        status.text = (completed ? "Completed" : "Imcomplete")
+        status.sizeToFit();
+        status.frame.origin = CGPoint(x: screenWidth/2 - (thetask.bounds.size.width / 2), y: status.frame.origin.y)
+        
         doc.text = com_date
         doc.sizeToFit();
         doc.frame.origin = CGPoint(x: screenWidth/2 - (doc.bounds.size.width / 2), y: screenHeight/3)
@@ -57,7 +72,7 @@ class ViewTask: UIViewController {
     }
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "Editor") {
+        if segue.identifier == "Editor" {
             edit = segue.destination as! EditTask
             
             edit.newcomDate = com_date
@@ -65,6 +80,14 @@ class ViewTask: UIViewController {
             edit.task = cur_task
             
         }
+        
+        if segue.identifier == "donewithView" {
+            t.task = cur_task
+            t.com_date = com_date
+            t.rem_date = rem_date
+        }
+        
+        
     }
     
     @IBAction func cancel(segue:UIStoryboardSegue) {
