@@ -11,7 +11,6 @@ import UIKit
 
 class ViewTask: UIViewController {
     var edit: EditTask!
-    var new_task = ""
     var cur_task = ""
     var com_date = ""
     var rem_date = ""
@@ -72,14 +71,41 @@ class ViewTask: UIViewController {
 
     @IBAction func done(segue:UIStoryboardSegue) {
         let taskDetailVC = segue.source as! EditTask
-        new_task = taskDetailVC.task
+        cur_task = taskDetailVC.newTask
         com_date = taskDetailVC.newcomDate
         if taskDetailVC.rem_date != "" {
             rem_date = taskDetailVC.rem_date
         }
+        print(taskDetailVC.newTask);
+        thetask.text = cur_task
+        recent(lb: thetask, height: 8)
+        doc.text = com_date
+        recent(lb: doc, height: 2)
         
+        if rem_date == "" {
+            rem.isHidden = true;
+            rd.isHidden = true;
+        }
+        else {
+            rem.text = "Reminder Date:"
+            rem.sizeToFit();
+            rd.text = rem_date
+            recent(lb: rd, height: 1.75)
+        }
         
     }
+    
+    func recent(lb: UILabel, height: CGFloat) {
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        lb.sizeToFit();
+        lb.frame.origin = CGPoint(x: screenWidth/2 - (lb.bounds.size.width / 2), y: screenHeight/height)
+        
+    }
+    
+    
     
 }
 
