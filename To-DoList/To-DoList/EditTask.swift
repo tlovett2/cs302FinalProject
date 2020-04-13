@@ -22,7 +22,11 @@ class EditTask: UIViewController {
     @IBOutlet weak var Reminder_Date2: UIDatePicker!
         
     @IBAction func hideReminderDate2(_ sender: UIDatePicker) {
-        
+        Reminder_Date2.datePickerMode = UIDatePicker.Mode.dateAndTime
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy h:mm a"
+        rem_date = String(dateFormatter.string(from: Reminder_Date2.date))
+        print(rem_date)
     }
     
     @IBOutlet weak var Reminder_Outlet2: UISwitch!
@@ -85,6 +89,8 @@ class EditTask: UIViewController {
         
         
     }
+    
+    
     
     
 }

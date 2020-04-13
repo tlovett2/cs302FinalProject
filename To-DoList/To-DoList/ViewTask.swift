@@ -43,6 +43,8 @@ class ViewTask: UIViewController {
         if rem_date == "" {
             rem.isHidden = true;
             rd.isHidden = true;
+            rd.sizeToFit();
+            rd.frame.origin = CGPoint(x: screenWidth/2 - (rd.bounds.size.width / 2), y: screenHeight/1.75)
         }
         else {
             rem.text = "Reminder Date:"
@@ -78,30 +80,32 @@ class ViewTask: UIViewController {
         }
         print(taskDetailVC.newTask);
         thetask.text = cur_task
-        recent(lb: thetask, height: 8)
+        recent(lb: thetask)
+        
         doc.text = com_date
-        recent(lb: doc, height: 2)
+        recent(lb: doc)
         
         if rem_date == "" {
             rem.isHidden = true;
             rd.isHidden = true;
         }
         else {
+            rem.isHidden = false;
+            rd.isHidden = false;
             rem.text = "Reminder Date:"
             rem.sizeToFit();
             rd.text = rem_date
-            recent(lb: rd, height: 1.75)
+            recent(lb: rd)
         }
         
     }
     
-    func recent(lb: UILabel, height: CGFloat) {
+    func recent(lb: UILabel) {
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
         
         lb.sizeToFit();
-        lb.frame.origin = CGPoint(x: screenWidth/2 - (lb.bounds.size.width / 2), y: screenHeight/height)
+        lb.frame.origin = CGPoint(x: screenWidth/2 - (lb.bounds.size.width / 2), y: lb.frame.origin.y)
         
     }
     
