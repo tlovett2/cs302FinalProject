@@ -32,6 +32,23 @@ class ViewTask: UIViewController {
         
         completed = (com_percent == 100) ? true : false;
         
+        if com_percent == 100 {
+            status.text = "Complete"
+        }
+        else if com_percent < 100 && com_percent > 60 {
+            status.text = "Nearly Complete"
+        }
+        else if com_percent <= 60 && com_percent >= 40 {
+            status.text = "Halfway Complete"
+        }
+        else if com_percent < 40 && com_percent > 0 {
+            status.text = "Mostly Imcomplete"
+        }
+        else {
+            status.text = "Imcomplete"
+        }
+        status.sizeToFit();
+        
     }
     
     

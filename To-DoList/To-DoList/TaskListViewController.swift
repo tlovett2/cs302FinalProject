@@ -26,13 +26,15 @@ class TaskListViewController: UITableViewController {
     var seg: UIStoryboardSegue?
     var tvc: Any?
     var visited = false
+    var ixdp = IndexPath()
+    
     
     
     
     @IBAction func cancel(segue:UIStoryboardSegue) {
        
     }
-
+    
     @IBAction func done(segue:UIStoryboardSegue) {
         
         if segue.identifier == "donewithView" {
@@ -45,6 +47,9 @@ class TaskListViewController: UITableViewController {
             t.completed = tsk.completed
             t.com_percent = tsk.com_percent
             tasks[index] = t
+            
+            tableView.cellForRow(at: ixdp)?.backgroundColor = (self.tasks[ixdp.row].completed) ? UIColor.systemGreen : UIColor(named: "customControlColor")
+            
             tableView.reloadData()
         }
         else {
@@ -68,6 +73,7 @@ class TaskListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         index = indexPath.row
+        ixdp = indexPath
         prepare(for: seg!, sender: tvc!)
         print(index)
     }
@@ -100,6 +106,9 @@ class TaskListViewController: UITableViewController {
         
         tasks = []
     }
+    
+    
+    
 
     // MARK: - Table view data source
 
@@ -128,7 +137,7 @@ class TaskListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
-
+        
         cell.textLabel?.text = tasks[indexPath.row].task
         
         return cell
@@ -145,6 +154,43 @@ class TaskListViewController: UITableViewController {
     }
     */
 
+    override func tableView(_ tableView: UITableView,
+      leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+      ->   UISwipeActionsConfiguration? {
+
+      // Get current state from data source
+        let favorite = tasks[indexPath.row].completed
+
+      let title = favorite ?
+        NSLocalizedString("Mark Imcomplete", comment: "Mark Imcomplete") :
+        NSLocalizedString("Mark Complete", comment: "Mark Complete")
+
+      let action = UIContextualAction(style: .normal, title: title,
+        handler: { (action, view, completionHandler) in
+        // Update data source when user taps action
+        self.tasks[indexPath.row].completed = !favorite
+        completionHandler(true)
+        
+          if(self.tasks[indexPath.row].completed) {
+            self.tasks[indexPath.row].com_percent = 100
+          }
+          else {
+            self.tasks[indexPath.row].com_percent = 0
+          }
+            
+        self.ixdp = indexPath
+            
+        tableView.cellForRow(at: indexPath)?.backgroundColor = (self.tasks[indexPath.row].completed) ? UIColor.systemGreen : UIColor(named: "customControlColor")
+        
+      })
+
+      action.image = UIImage(named: "heart")
+      action.backgroundColor = favorite ? .red : .green
+      let configuration = UISwipeActionsConfiguration(actions: [action])
+
+        
+      return configuration
+    }
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -153,14 +199,16 @@ class TaskListViewController: UITableViewController {
             
             tasks.remove(at: indexPath.row)
             
+            tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor(named: "customControlColor")
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-            tableView.reloadData();
+            
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    
 
     /*
     // Override to support rearranging the table view.
@@ -174,16 +222,6 @@ class TaskListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
     */
 

@@ -256,20 +256,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9vE-xi-ogG" id="GFu-EV-3gV">
                                     <rect key="frame" x="0.0" y="0.0" width="351" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="IR1-gE-Jg8">
-                                            <rect key="frame" x="199" y="6" width="144" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <segments>
-                                                <segment title=""/>
-                                                <segment title="Complete"/>
-                                            </segments>
-                                            <connections>
-                                                <action selector="Completion:" destination="s6r-c1-J06" eventType="valueChanged" id="kyh-T6-FRk"/>
-                                            </connections>
-                                        </segmentedControl>
-                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="jl1-vG-y3G" kind="show" identifier="view" trigger="accessoryAction" id="1It-Fc-kuT"/>
