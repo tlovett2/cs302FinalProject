@@ -7,11 +7,15 @@ struct aTask {
         com_date = ""
         rem_date = ""
         completed = false
+        com_percent = 0
+        index = 0
     }
     var task: String
     var com_date: String
     var rem_date: String
     var completed: Bool
+    var com_percent: Int
+    var index: Int
 }
 
 class TaskListViewController: UITableViewController {
@@ -19,6 +23,10 @@ class TaskListViewController: UITableViewController {
     var index: Int = 0
     var tasks = [aTask]()
     var tk: ViewTask!
+    var seg: UIStoryboardSegue?
+    var tvc: Any?
+    var visited = false
+    
     
     
     @IBAction func cancel(segue:UIStoryboardSegue) {
@@ -34,7 +42,8 @@ class TaskListViewController: UITableViewController {
             t.task = tsk.cur_task
             t.com_date = tsk.com_date
             t.rem_date = tsk.rem_date
-            t.completed = false
+            t.completed = tsk.completed
+            t.com_percent = tsk.com_percent
             tasks[index] = t
             tableView.reloadData()
         }
@@ -46,8 +55,10 @@ class TaskListViewController: UITableViewController {
             if taskDetailVC.rem_date != nil {
                 t.rem_date = taskDetailVC.rem_date
             }
+            t.completed = false
+            t.com_percent = 0
             
-            //add completion---------------------
+            t.index = tasks.count
             
             tasks.append(t)
             tableView.reloadData()
@@ -55,17 +66,31 @@ class TaskListViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        index = indexPath.row
+        prepare(for: seg!, sender: tvc!)
+        print(index)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "view") {
-            tk = segue.destination as! ViewTask
-            tk.cur_task = tasks[index].task
-            tk.com_date = tasks[index].com_date
-            tk.rem_date = tasks[index].rem_date
-            tk.completed = tasks[index].completed
-            //ADD COMPLETION BOOL TO VIEWTASK FILE_________________________
             
-            tk.index = index
+            if visited == false {
+                seg = segue
+                tvc = sender
+                visited = true
+            }
+            else {
+                tk = segue.destination as! ViewTask
+                tk.cur_task = tasks[index].task
+                tk.com_date = tasks[index].com_date
+                tk.rem_date = tasks[index].rem_date
+                tk.completed = tasks[index].completed
+                tk.com_percent = tasks[index].com_percent
+                print(index)
+                tk.index = index
+                visited = false
+            }
         }
         
     }
@@ -120,17 +145,22 @@ class TaskListViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            
+            tasks.remove(at: indexPath.row)
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            tableView.reloadData();
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.

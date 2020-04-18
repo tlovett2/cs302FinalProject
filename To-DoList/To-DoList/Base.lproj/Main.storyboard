@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dvA-40-V0c">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -282,7 +282,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tasks" id="n8e-RV-wHh">
-                        <barButtonItem key="leftBarButtonItem" image="trash" catalog="system" largeContentSizeImage="square.and.pencil" id="jQJ-bs-QcA"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="DxW-4s-r2k">
                             <connections>
                                 <segue destination="aUD-l0-Jlm" kind="presentation" identifier="Adder" id="K6k-1p-gja"/>
@@ -403,7 +402,5 @@
         <image name="arrow.left.circle" catalog="system" width="128" height="121"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="nosign" catalog="system" width="128" height="121"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="118"/>
-        <image name="trash" catalog="system" width="121" height="128"/>
     </resources>
 </document>

@@ -14,9 +14,11 @@ class ViewTask: UIViewController {
     var com_date = ""
     var rem_date = ""
     var completed = false
-    
+    var com_percent = 0
     var index: Int!
     var t = aTask()
+    
+    
     
     func printtsk(string: String) {
         print("\(cur_task)\n")
@@ -26,7 +28,9 @@ class ViewTask: UIViewController {
     @IBOutlet weak var percentage: UISlider!
     
     @IBAction func perChange(_ sender: Any) {
+        com_percent = Int(percentage.value)
         
+        completed = (com_percent == 100) ? true : false;
         
     }
     
@@ -69,6 +73,10 @@ class ViewTask: UIViewController {
             rd.frame.origin = CGPoint(x: screenWidth/2 - (rd.bounds.size.width / 2), y: screenHeight/1.75)
         }
         
+        percentage.value = Float(com_percent)
+        percentage.minimumTrackTintColor = UIColor.systemGreen
+        percentage.maximumTrackTintColor = UIColor.systemRed
+        
     }
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -85,6 +93,8 @@ class ViewTask: UIViewController {
             t.task = cur_task
             t.com_date = com_date
             t.rem_date = rem_date
+            t.com_percent = com_percent
+            t.completed = completed
         }
         
         
