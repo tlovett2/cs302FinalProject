@@ -295,8 +295,8 @@
                             <rect key="frame" x="121.5" y="5.5" width="171" height="33"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <segments>
-                                <segment title="Primary"/>
-                                <segment title="Secondary"/>
+                                <segment title="Tasks"/>
+                                <segment title="Completed"/>
                             </segments>
                             <connections>
                                 <action selector="change_Tab:" destination="s6r-c1-J06" eventType="valueChanged" id="JrK-Qo-h8h"/>

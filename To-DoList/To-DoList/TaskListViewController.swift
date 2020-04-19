@@ -268,6 +268,8 @@ class TaskListViewController: UITableViewController {
         self.ixdp = indexPath
             
         tableView.cellForRow(at: indexPath)?.backgroundColor = (self.tasks[indexPath.row].completed) ? UIColor.systemGreen : UIColor(named: "customControlColor")
+            
+        self.check_delete(self, index: indexPath)
         
       })
 
@@ -311,6 +313,37 @@ class TaskListViewController: UITableViewController {
         return true
     }
     */
+    
+    @IBAction func check_delete(_ sender: Any, index: IndexPath) {
+        if tasks[index.row].completed {
+            let alert = UIAlertController(title: "Do you want to remove the task?", message: "", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+                self.tasks[index.row].seg = 1
+                self.tasks[index.row].hidden = true
+                self.change_Tab(self)
+            }))
+            
+            self.present(alert, animated: true)
+            
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                print("\(self.tasks[index.row].task) has been deleted")
+                
+                self.tasks.remove(at: index.row)
+                self.TBV.cellForRow(at: index)?.backgroundColor = UIColor(named: "customControlColor")
+                self.TBV.deleteRows(at: [index], with: .fade)
+                
+            }))
+        }
+        else {
+            self.tasks[index.row].seg = 0
+            self.tasks[index.row].hidden = true
+            self.change_Tab(self)
+        }
+    }
+    
+    
+    
     
     @IBOutlet weak var alt: UIAlertController!
     
