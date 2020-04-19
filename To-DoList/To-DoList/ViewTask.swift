@@ -21,7 +21,9 @@ class ViewTask: UIViewController {
     
     var hidden = false
     var segment = 0
+    var cur_segment = 0
     
+    var seg_sections = [String]()
     
     func printtsk(string: String) {
         print("\(cur_task)\n")
@@ -97,6 +99,15 @@ class ViewTask: UIViewController {
         percentage.minimumTrackTintColor = UIColor.systemGreen
         percentage.maximumTrackTintColor = UIColor.systemRed
         
+        FileSelect.removeAllSegments()
+        for i in seg_sections.count {
+            FileSelect.insertSegment(withTitle: seg_sections[i], at: i, animated: true)
+            
+        }
+        FileSelect.selectedSegmentIndex = segment
+        FileSelect.sizeToFit()
+        FileSelect.apportionsSegmentWidthsByContent = true
+        FileSelect.frame.origin = CGPoint(x: screenWidth/2 - (FileSelect.bounds.size.width / 2), y: FileSelect.frame.origin.y)
     }
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -162,6 +173,17 @@ class ViewTask: UIViewController {
         
     }
     
+    @IBOutlet weak var FileSelect: UISegmentedControl!
+    @IBAction func Change_File(_ sender: Any) {
+        
+        segment = FileSelect.selectedSegmentIndex
+        if segment == cur_segment {
+            hidden = false
+        }
+        else {
+            hidden = true
+        }
+    }
     
     
 }

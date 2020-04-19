@@ -1,6 +1,13 @@
 
 import UIKit
 
+extension Int: Sequence {
+    public func makeIterator() -> CountableRange<Int>.Iterator {
+        return (0..<self).makeIterator()
+    }
+}
+
+
 struct aTask {
     init() {
         task = ""
@@ -39,6 +46,7 @@ class TaskListViewController: UITableViewController {
     
     var selectedFile = 0
     var TBV = UITableView()
+    var new_seg: String?
     
     //New Stuff with segment
     
@@ -162,11 +170,15 @@ class TaskListViewController: UITableViewController {
                 tk.index = index
                 visited = false
                 
-                //new-----
+                
                 tk.hidden = tasks[index].hidden
                 tk.segment = tasks[index].seg
-                //--------
                 
+                tk.cur_segment = selectedFile
+                
+                for i in Files.numberOfSegments {
+                    tk.seg_sections.append(Files.titleForSegment(at: i)!)
+                }
                 
             }
         }
@@ -185,6 +197,8 @@ class TaskListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Files.sizeToFit()
         
         tasks = []
     }
@@ -297,5 +311,35 @@ class TaskListViewController: UITableViewController {
         return true
     }
     */
+    
+    @IBOutlet weak var alt: UIAlertController!
+    
+    @IBAction func alert (_ sender: Any) {
+        let alert = UIAlertController(title: "Name New Section", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Input section here..."
+        })
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+
+            if let name = alert.textFields?.first?.text {
+                print("Added section: \(name)")
+                self.addSection(self, seg: name)
+            }
+        }))
+
+        self.present(alert, animated: true)
+        
+    }
+    
+    @IBAction func addSection(_ sender: Any, seg: String) {
+        Files.insertSegment(withTitle: seg, at: Files.numberOfSegments, animated: true)
+        print(seg)
+        
+    }
+    
+    
+    
 }
