@@ -35,6 +35,7 @@ class EditTask: UIViewController {
        
         if Reminder_Outlet2.isOn {
             Reminder_Date2.isHidden = false;
+            hideReminderDate2(Reminder_Date2)
         }
         else {
             Reminder_Date2.isHidden = true;

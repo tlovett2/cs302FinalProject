@@ -16,10 +16,9 @@ struct aTask {
         completed = false
         com_percent = 0
         index = 0
-    
-        //new
         hidden = false
         seg = 0
+        prevseg = 0
     }
     var task: String
     var com_date: String
@@ -28,9 +27,9 @@ struct aTask {
     var com_percent: Int
     var index: Int
     
-    //new
     var hidden: Bool
     var seg: Int
+    var prevseg: Int
     var cell: UITableViewCell?
 }
 
@@ -102,17 +101,41 @@ class TaskListViewController: UITableViewController {
             t.completed = tsk.completed
             t.com_percent = tsk.com_percent
             
-            //new-------
-            t.seg = tsk.segment
-            t.hidden = tsk.hidden
-            print("hidden at \(index):")
-            print(t.hidden)
-            print("segment at \(index):")
-            print(t.seg)
-            //------
+            if tsk.completed {
+                t.seg = 1
+                print("jobe")
+                t.prevseg = tsk.prevseg
+            }
+            else if tsk.completed == false && tsk.segment != 1 {
+                t.seg = tsk.segment
+                print("mack")
+                print(tsk.prevseg)
+                if tsk.segment != tsk.prevseg {
+                    t.prevseg = tsk.segment
+                }
+                
+                print(tsk.prevseg)
+                print("\n")
+            }
+            else {
+                print("jimmy")
+                t.seg = tsk.prevseg
+                t.prevseg = tsk.prevseg
+                print(tsk.prevseg)
+                print("\n")
+            }
+            
+            if tsk.cur_segment == t.seg {
+                t.hidden = false
+            }
+            else {
+                t.hidden = true
+            }
+            
+            
             
             tasks[index] = t
-            
+            print(tasks[index].com_percent)
             tableView.cellForRow(at: ixdp)?.backgroundColor = (self.tasks[ixdp.row].completed) ? UIColor.systemGreen : UIColor(named: "customControlColor")
             
             tableView.reloadData()
@@ -130,14 +153,13 @@ class TaskListViewController: UITableViewController {
             
             t.index = tasks.count
             
-            //new------
-            
             t.hidden = false
-            t.seg = selectedFile
-            print(t.hidden)
-            print(t.seg)
+            t.seg = Files.selectedSegmentIndex
+            t.prevseg = Files.selectedSegmentIndex
+            print("prevseg:")
+            print(t.prevseg)
             
-            //------------
+            
             tasks.append(t)
             tableView.reloadData()
         }
@@ -170,26 +192,17 @@ class TaskListViewController: UITableViewController {
                 tk.index = index
                 visited = false
                 
-                
                 tk.hidden = tasks[index].hidden
                 tk.segment = tasks[index].seg
                 
+                tk.prevseg = tasks[index].prevseg
+                print("prevseg in prep: \(tk.prevseg)")
                 tk.cur_segment = selectedFile
                 
                 for i in Files.numberOfSegments {
                     tk.seg_sections.append(Files.titleForSegment(at: i)!)
                 }
                 
-            }
-        }
-        else {
-            if tasks.count == 15 {
-                print("Get to working on finishing some of your current tasks.\n")
-                
-                //maybe put a pop up
-                //uialert
-            
-            
             }
         }
         
@@ -223,10 +236,10 @@ class TaskListViewController: UITableViewController {
 
         cell.textLabel?.text = tasks[indexPath.row].task
         
-        //new----
+        
         tasks[indexPath.row].cell = cell
         TBV = tableView
-        //-----
+        
         return cell
     }
     
@@ -273,7 +286,6 @@ class TaskListViewController: UITableViewController {
         
       })
 
-      action.image = UIImage(named: "heart")
       action.backgroundColor = favorite ? .red : .green
       let configuration = UISwipeActionsConfiguration(actions: [action])
 
@@ -336,9 +348,11 @@ class TaskListViewController: UITableViewController {
             }))
         }
         else {
-            self.tasks[index.row].seg = 0
+            self.tasks[index.row].seg = self.tasks[index.row].prevseg
             self.tasks[index.row].hidden = true
             self.change_Tab(self)
+            print("prevseg:")
+            print(self.tasks[index.row].prevseg)
         }
     }
     

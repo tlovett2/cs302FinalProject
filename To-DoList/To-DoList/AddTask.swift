@@ -32,6 +32,7 @@ class AddTask: UIViewController {
             Form.dateFormat = "dd MMMM yyyy h:mm a"
             let result = Form.string(from: date)
             rem_date = result;
+            hideReminderDate(Reminder_Date)
         }
     }
     

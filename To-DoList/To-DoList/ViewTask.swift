@@ -17,6 +17,7 @@ class ViewTask: UIViewController {
     var com_percent = 0
     var index: Int!
     var t = aTask()
+    var prevseg = 0
     
     
     var hidden = false
@@ -121,15 +122,43 @@ class ViewTask: UIViewController {
         }
         
         if segue.identifier == "donewithView" {
-            t.task = cur_task
-            t.com_date = com_date
-            t.rem_date = rem_date
-            t.com_percent = com_percent
-            t.completed = completed
+            if FileSelect.selectedSegmentIndex == 1 && com_percent == 100 {
+                
+//                t.com_percent = 100
+//                t.completed = true
+//                t.seg = 1
+//                t.task = cur_task
+                
+                com_percent = 100
+                completed = true
+                segment = 1
+            }
+            else if cur_segment == 1 && FileSelect.selectedSegmentIndex != 1 {
+                com_percent = 0
+                completed = false
+                segment = FileSelect.selectedSegmentIndex
+
+            }
+            else if com_percent == 100 {
+                com_percent = 100
+                completed = true
+                segment = 1
+                FileSelect.selectedSegmentIndex = 1
+
+                hidden = true
+            }
+            else {
+
+                segment = FileSelect.selectedSegmentIndex
+                completed = false
+                perChange(percentage!)
+            }
+
         }
         
         
     }
+    
     
     @IBAction func cancel(segue:UIStoryboardSegue) {
        
