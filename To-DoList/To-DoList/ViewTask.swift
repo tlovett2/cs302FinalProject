@@ -19,6 +19,9 @@ class ViewTask: UIViewController {
     var t = aTask()
     
     
+    var hidden = false
+    var segment = 0
+    
     
     func printtsk(string: String) {
         print("\(cur_task)\n")

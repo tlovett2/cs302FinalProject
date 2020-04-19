@@ -9,6 +9,10 @@ struct aTask {
         completed = false
         com_percent = 0
         index = 0
+    
+        //new
+        hidden = false
+        seg = 0
     }
     var task: String
     var com_date: String
@@ -16,6 +20,11 @@ struct aTask {
     var completed: Bool
     var com_percent: Int
     var index: Int
+    
+    //new
+    var hidden: Bool
+    var seg: Int
+    var cell: UITableViewCell?
 }
 
 class TaskListViewController: UITableViewController {
@@ -28,6 +37,44 @@ class TaskListViewController: UITableViewController {
     var visited = false
     var ixdp = IndexPath()
     
+    var selectedFile = 0
+    var TBV = UITableView()
+    
+    //New Stuff with segment
+    
+    @IBOutlet weak var Files: UISegmentedControl!
+    @IBAction func change_Tab(_ sender: Any) {
+        var i = 0
+        
+        selectedFile = Files.selectedSegmentIndex
+        
+        while i < tasks.count {
+            if tasks[i].seg == selectedFile {
+                tasks[i].hidden = false
+                tasks[i].cell?.isHidden = false
+            }
+            else {
+                tasks[i].hidden = true
+                tasks[i].cell?.isHidden = true
+            }
+            i += 1
+        }
+        TBV.reloadData()
+        
+    }
+    
+    //--------------
+    
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var height: CGFloat = 0.0;
+        if (tasks[indexPath.row].hidden) {
+            height = 0.0;
+        } else {
+            height = 44.0;
+        }
+        return height;
+    }
     
     
     
@@ -46,6 +93,16 @@ class TaskListViewController: UITableViewController {
             t.rem_date = tsk.rem_date
             t.completed = tsk.completed
             t.com_percent = tsk.com_percent
+            
+            //new-------
+            t.seg = tsk.segment
+            t.hidden = tsk.hidden
+            print("hidden at \(index):")
+            print(t.hidden)
+            print("segment at \(index):")
+            print(t.seg)
+            //------
+            
             tasks[index] = t
             
             tableView.cellForRow(at: ixdp)?.backgroundColor = (self.tasks[ixdp.row].completed) ? UIColor.systemGreen : UIColor(named: "customControlColor")
@@ -65,6 +122,14 @@ class TaskListViewController: UITableViewController {
             
             t.index = tasks.count
             
+            //new------
+            
+            t.hidden = false
+            t.seg = selectedFile
+            print(t.hidden)
+            print(t.seg)
+            
+            //------------
             tasks.append(t)
             tableView.reloadData()
         }
@@ -96,6 +161,23 @@ class TaskListViewController: UITableViewController {
                 print(index)
                 tk.index = index
                 visited = false
+                
+                //new-----
+                tk.hidden = tasks[index].hidden
+                tk.segment = tasks[index].seg
+                //--------
+                
+                
+            }
+        }
+        else {
+            if tasks.count == 15 {
+                print("Get to working on finishing some of your current tasks.\n")
+                
+                //maybe put a pop up
+                //uialert
+            
+            
             }
         }
         
@@ -121,25 +203,16 @@ class TaskListViewController: UITableViewController {
         // return the number of rows
         return tasks.count
     }
-
-    @IBAction func Completion(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 1 {
-            sender.backgroundColor = UIColor.green
-            
-        }
-        else {
-            sender.backgroundColor = UIColor.red
-        }
-        
-    }
-    
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
-        
+
         cell.textLabel?.text = tasks[indexPath.row].task
         
+        //new----
+        tasks[indexPath.row].cell = cell
+        TBV = tableView
+        //-----
         return cell
     }
     

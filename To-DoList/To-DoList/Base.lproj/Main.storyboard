@@ -241,7 +241,7 @@
             </objects>
             <point key="canvasLocation" x="1034.7826086956522" y="-607.36607142857144"/>
         </scene>
-        <!--Tasks-->
+        <!--Task List View Controller-->
         <scene sceneID="PfF-nL-lWL">
             <objects>
                 <tableViewController storyboardIdentifier="table" clearsSelectionOnViewWillAppear="NO" id="s6r-c1-J06" customClass="TaskListViewController" customModule="To_Do_List" customModuleProvider="target" sceneMemberID="viewController">
@@ -267,13 +267,35 @@
                             <outlet property="delegate" destination="s6r-c1-J06" id="9s9-5Z-1fL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Tasks" id="n8e-RV-wHh">
+                    <navigationItem key="navigationItem" id="n8e-RV-wHh">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="wfX-hs-Z3D">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BZv-Gf-n2r">
+                                <rect key="frame" x="20" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Section"/>
+                            </button>
+                        </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="e6Z-Vj-47d">
+                            <rect key="frame" x="141.5" y="5.5" width="131" height="33"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <segments>
+                                <segment title="Tasks"/>
+                                <segment title="Second"/>
+                            </segments>
+                            <connections>
+                                <action selector="change_Tab:" destination="s6r-c1-J06" eventType="valueChanged" id="JrK-Qo-h8h"/>
+                            </connections>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="DxW-4s-r2k">
                             <connections>
                                 <segue destination="aUD-l0-Jlm" kind="presentation" identifier="Adder" id="K6k-1p-gja"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="Files" destination="e6Z-Vj-47d" id="dqb-EZ-fS2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d68-pS-ByU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
