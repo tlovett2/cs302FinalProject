@@ -24,7 +24,7 @@
 		8D218AB5243A3CF100DDDDF9 /* To-Do List.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "To-Do List.entitlements"; sourceTree = "<group>"; };
 		8D218AB8243ABFAB00DDDDF9 /* EditTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTask.swift; sourceTree = "<group>"; };
 		8D218ABA243AC73D00DDDDF9 /* ViewTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTask.swift; sourceTree = "<group>"; };
-		E2A2F00B23E0C524003E71AD /* To-Do List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "To-Do List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2A2F00B23E0C524003E71AD /* The Amazing List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Amazing List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A2F00E23E0C524003E71AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2A2F01023E0C524003E71AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E2A2F01523E0C524003E71AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		E2A2F00C23E0C524003E71AD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E2A2F00B23E0C524003E71AD /* To-Do List.app */,
+				E2A2F00B23E0C524003E71AD /* The Amazing List.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,7 +98,7 @@
 			);
 			name = "To-DoList";
 			productName = IOSAddRowsTableViewTutorial;
-			productReference = E2A2F00B23E0C524003E71AD /* To-Do List.app */;
+			productReference = E2A2F00B23E0C524003E71AD /* The Amazing List.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -312,8 +312,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bhaynie;
-				PRODUCT_NAME = "To-Do List";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BTIndustries.TheAmazingList;
+				PRODUCT_NAME = "The Amazing List";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -333,8 +333,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bhaynie;
-				PRODUCT_NAME = "To-Do List";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BTIndustries.TheAmazingList;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.BTIndustries.TheAmazingList;
+				PRODUCT_NAME = "The Amazing List";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

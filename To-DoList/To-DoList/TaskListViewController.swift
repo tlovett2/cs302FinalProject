@@ -182,7 +182,7 @@ class TaskListViewController: UITableViewController {
                 visited = true
             }
             else {
-                tk = segue.destination as! ViewTask
+                tk = segue.destination as? ViewTask
                 tk.cur_task = tasks[index].task
                 tk.com_date = tasks[index].com_date
                 tk.rem_date = tasks[index].rem_date

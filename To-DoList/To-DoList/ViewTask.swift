@@ -69,31 +69,30 @@ class ViewTask: UIViewController {
         super.viewDidLoad()
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
         
         thetask.text = cur_task
         thetask.sizeToFit();
-        thetask.frame.origin = CGPoint(x: screenWidth/2 - (thetask.bounds.size.width / 2), y: screenHeight/8)
+        thetask.frame.origin = CGPoint(x: screenWidth/2 - (thetask.bounds.size.width / 2), y: thetask.frame.origin.y)
         status.text = (completed ? "Completed" : "Imcomplete")
         status.sizeToFit();
         status.frame.origin = CGPoint(x: screenWidth/2 - (thetask.bounds.size.width / 2), y: status.frame.origin.y)
         
         doc.text = com_date
         doc.sizeToFit();
-        doc.frame.origin = CGPoint(x: screenWidth/2 - (doc.bounds.size.width / 2), y: screenHeight/3)
+        doc.frame.origin = CGPoint(x: screenWidth/2 - (doc.bounds.size.width / 2), y: doc.frame.origin.y)
         
         if rem_date == "" {
             rem.isHidden = true;
             rd.isHidden = true;
             rd.sizeToFit();
-            rd.frame.origin = CGPoint(x: screenWidth/2 - (rd.bounds.size.width / 2), y: screenHeight/1.75)
+            rd.frame.origin = CGPoint(x: screenWidth/2 - (rd.bounds.size.width / 2), y: rd.frame.origin.y)
         }
         else {
             rem.text = "Reminder Date:"
             rem.sizeToFit();
             rd.text = rem_date
             rd.sizeToFit();
-            rd.frame.origin = CGPoint(x: screenWidth/2 - (rd.bounds.size.width / 2), y: screenHeight/1.75)
+            rd.frame.origin = CGPoint(x: screenWidth/2 - (rd.bounds.size.width / 2), y: rd.frame.origin.y)
         }
         
         percentage.value = Float(com_percent)
@@ -113,7 +112,7 @@ class ViewTask: UIViewController {
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Editor" {
-            edit = segue.destination as! EditTask
+            edit = (segue.destination as! EditTask)
             
             edit.newcomDate = com_date
             edit.rem_date = rem_date
