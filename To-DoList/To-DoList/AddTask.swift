@@ -90,6 +90,7 @@ class AddTask: UIViewController {
     
     //This function is called whenever the scene leaves and is going back to the table view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //checks if the segue is sending to the task list view page from the done button
         if segue.identifier == "doneSegue" {
             name = taskName.text!
             
