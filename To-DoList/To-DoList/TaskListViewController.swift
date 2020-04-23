@@ -386,6 +386,7 @@ class TaskListViewController: UITableViewController {
     @IBOutlet weak var alt: UIAlertController!
     //This function call whenever the new section button is clicked
     @IBAction func alert (_ sender: Any) {
+/*
         //Initalizes the alert to be a popup
         let alert = UIAlertController(title: "Name New Section", message: nil, preferredStyle: .alert)
         //Adds the cancel button
@@ -404,6 +405,33 @@ class TaskListViewController: UITableViewController {
         }))
         //Calls the alert
         self.present(alert, animated: true)
+ */
+        
+        let alert = UIAlertController(title: "Would you like to add or delete a section?", message: "Enter into the box the section you would like to add or delete.", preferredStyle: .alert)
+        
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Input section here"
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
+            //Gets the name and adds the section to the segmented controller
+            if let name = alert.textFields?.first?.text {
+                self.addSection(self, seg: name)
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { action in
+            
+            if let name = alert.textFields?.first?.text {
+                self.deleteSection(self, seg: name)
+            }
+            
+        }))
+        
+
+        
+        self.present(alert, animated: true)
         
     }
     //Adds a section to the segmented controller
@@ -411,6 +439,38 @@ class TaskListViewController: UITableViewController {
         Files.insertSegment(withTitle: seg, at: Files.numberOfSegments, animated: true)        
     }
     
+    @IBAction func deleteSection(_ sender: Any, seg: String) {
+        var seg_index = -1
+        for i in Files.numberOfSegments {
+            let s = Files.titleForSegment(at: i)
+            if s == seg {
+                seg_index = i
+                break
+            }
+        }
+        if seg_index > 1 {
+            print("file found")
+            var i = 0
+            //find tasks that are in deleted segment
+            while i < tasks.count {
+                if tasks[i].seg == seg_index {
+                    tasks.remove(at: i)
+                }
+                else {
+                    i += 1
+                }
+            }
+            Files.removeSegment(at: seg_index, animated: true)
+            print("section removed")
+            TBV.reloadData()
+            Files.selectedSegmentIndex = seg_index - 1
+        }
+        
+        
+    }
     
+    func delete_Section(_ sender: Any, seg: String) -> Bool {
+        return true
+    }
     
 }

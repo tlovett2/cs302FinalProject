@@ -285,14 +285,14 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BZv-Gf-n2r">
                                 <rect key="frame" x="20" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add Section"/>
+                                <state key="normal" title="Sections"/>
                                 <connections>
                                     <action selector="alert:" destination="s6r-c1-J06" eventType="touchUpInside" id="MTH-S9-BAE"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="e6Z-Vj-47d">
-                            <rect key="frame" x="121" y="6" width="173" height="33"/>
+                            <rect key="frame" x="101" y="6" width="212" height="33"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <segments>
                                 <segment title="Tasks"/>
