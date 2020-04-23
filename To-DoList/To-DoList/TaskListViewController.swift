@@ -247,6 +247,25 @@ class TaskListViewController: UITableViewController {
         
     }
     
+    @IBAction func cant_do_that(_ sender: Any) {
+        let alert = UIAlertController(title: "Can't add a task to completed section.", message: nil, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        
+         self.present(alert, animated: true)
+        
+    }
+    
+    //can cancel segue calls by returning false
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "Adder" && Files.selectedSegmentIndex == 1 {
+            cant_do_that(self)
+            return false
+        }
+        else {
+            return true
+        }
+    }
     
     //This is called everytime the table loads
     override func viewDidLoad() {
@@ -386,27 +405,7 @@ class TaskListViewController: UITableViewController {
     @IBOutlet weak var alt: UIAlertController!
     //This function call whenever the new section button is clicked
     @IBAction func alert (_ sender: Any) {
-/*
-        //Initalizes the alert to be a popup
-        let alert = UIAlertController(title: "Name New Section", message: nil, preferredStyle: .alert)
-        //Adds the cancel button
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
-        //Adds the text field to the popup
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "Input section here..."
-        })
-        //Adds the okay button to the popup
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            //Gets the name and adds the section to the segmented controller
-            if let name = alert.textFields?.first?.text {
-                self.addSection(self, seg: name)
-            }
-        }))
-        //Calls the alert
-        self.present(alert, animated: true)
- */
-        
         let alert = UIAlertController(title: "Would you like to add or delete a section?", message: "Enter into the box the section you would like to add or delete.", preferredStyle: .alert)
         
         alert.addTextField(configurationHandler: { textField in
@@ -429,11 +428,10 @@ class TaskListViewController: UITableViewController {
             
         }))
         
-
-        
         self.present(alert, animated: true)
         
     }
+    
     //Adds a section to the segmented controller
     @IBAction func addSection(_ sender: Any, seg: String) {
         Files.insertSegment(withTitle: seg, at: Files.numberOfSegments, animated: true)        
@@ -468,9 +466,6 @@ class TaskListViewController: UITableViewController {
         
         
     }
-    
-    func delete_Section(_ sender: Any, seg: String) -> Bool {
-        return true
-    }
+
     
 }
