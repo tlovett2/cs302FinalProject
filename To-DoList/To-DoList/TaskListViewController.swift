@@ -314,7 +314,7 @@ class TaskListViewController: UITableViewController {
         
         //Sets the title based on if the task is already completed or not
       let title = favorite ?
-        NSLocalizedString("Mark Imcomplete", comment: "Mark Imcomplete") :
+        NSLocalizedString("Mark Incomplete", comment: "Mark Incomplete") :
         NSLocalizedString("Mark Complete", comment: "Mark Complete")
 
         //Initializes the actions
@@ -466,6 +466,7 @@ class TaskListViewController: UITableViewController {
         
         
     }
+    
 
     
 }

@@ -256,8 +256,8 @@
         <!--Task List View Controller-->
         <scene sceneID="PfF-nL-lWL">
             <objects>
-                <tableViewController storyboardIdentifier="table" clearsSelectionOnViewWillAppear="NO" id="s6r-c1-J06" customClass="TaskListViewController" customModule="The_Amazing_List" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jD8-yV-QSf">
+                <tableViewController storyboardIdentifier="table" useStoryboardIdentifierAsRestorationIdentifier="YES" clearsSelectionOnViewWillAppear="NO" id="s6r-c1-J06" customClass="TaskListViewController" customModule="The_Amazing_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="tableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jD8-yV-QSf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -292,7 +292,7 @@
                             </button>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="e6Z-Vj-47d">
-                            <rect key="frame" x="101" y="6" width="212" height="33"/>
+                            <rect key="frame" x="118" y="6" width="212" height="33"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <segments>
                                 <segment title="Tasks"/>

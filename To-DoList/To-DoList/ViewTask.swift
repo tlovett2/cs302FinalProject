@@ -58,10 +58,10 @@ class ViewTask: UIViewController {
             status.text = "Halfway Complete"
         }
         else if com_percent < 40 && com_percent > 0 {
-            status.text = "Mostly Imcomplete"
+            status.text = "Mostly Incomplete"
         }
         else {
-            status.text = "Imcomplete"
+            status.text = "Incomplete"
         }
         //adjusts the size of the "complete" text
         status.sizeToFit();
@@ -92,7 +92,7 @@ class ViewTask: UIViewController {
         //Sets the position of the task title
         thetask.frame.origin = CGPoint(x: screenWidth/2 - (thetask.bounds.size.width / 2), y: thetask.frame.origin.y)
         //Sets the completed text based on if it is completed or not
-        status.text = (completed ? "Completed" : "Imcomplete")
+        status.text = (completed ? "Completed" : "Incomplete")
         status.sizeToFit();
         // Sets the position of the completed text
         status.frame.origin = CGPoint(x: screenWidth/2 - (thetask.bounds.size.width / 2), y: status.frame.origin.y)
