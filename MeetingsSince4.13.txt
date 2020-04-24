@@ -1,0 +1,15 @@
+4/16  - 4 hours
+Successfully implemented the different task sections allowing to the user to add another task list and change the task's current list
+
+4/17  - 2 hours
+Polished the app before the in lab demo. Created the BYODS presentation and recorded it
+
+4/23  - 30 minutes
+Recorded the app demo
+
+4/24  - 1 hour
+Created the documentation
+
+Braxton:
+4/22 - 1.5 hours
+Added a remove function to the tasks lists and minor bug fixes
