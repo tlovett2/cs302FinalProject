@@ -219,6 +219,11 @@ class ViewTask: UIViewController {
             rem.isHidden = true;
             rd.isHidden = true;
         }
+        else if (taskDetailVC.Reminder_Outlet2.isOn == false) {
+            rem.isHidden = true;
+            rd.isHidden = true;
+            rem_date = ""
+        }
         else {
             //Otherwise unhides it and adds the data
             rem.isHidden = false;

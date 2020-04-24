@@ -9,7 +9,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -32,16 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     //added
-    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
-        
-        return true
-    }
-    
-    func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool {
-        return true
-    }
-    //
-    
+        func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        print("AppDelegate shouldSaveApplicationState")
 
+        return true
+    }
+
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        print("AppDelegate shouldRestoreApplicationState")
+
+        return true
+    }
+    
+    //
 }
 
