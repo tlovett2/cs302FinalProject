@@ -2,7 +2,7 @@
 import UIKit
 
 //This class is the entirety of the add task screen
-class AddTask: UIViewController {
+class AddTask: UIViewController, UITextFieldDelegate {
     //The reminder date that will be given from the date picker
     var rem_date: String!
     // the completion date that will be given from the date picker
@@ -97,5 +97,23 @@ class AddTask: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        taskName.delegate = self
+        taskName.returnKeyType = .done
+        
+        
+        self.view.addSubview(taskName)
+    }
+    
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        taskName.resignFirstResponder()
+        
+        return true
+    }
    
 }

@@ -12,7 +12,7 @@ import UIKit
 
 
 //This class is the entirety of the edit task page
-class EditTask: UIViewController {
+class EditTask: UIViewController, UITextFieldDelegate {
     //Reminder date
     var rem_date = ""
     //Task name
@@ -109,6 +109,25 @@ class EditTask: UIViewController {
         }
         
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        taskName2.delegate = self
+        taskName2.returnKeyType = .done
+        
+        
+        self.view.addSubview(taskName2)
+    }
+    
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        taskName2.resignFirstResponder()
+        
+        return true
     }
     
 }
