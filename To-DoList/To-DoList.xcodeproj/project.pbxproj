@@ -10,6 +10,7 @@
 		3819998F241AAF4B00092939 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3819998E241AAF4B00092939 /* Default-568h@2x.png */; };
 		8D218AB9243ABFAB00DDDDF9 /* EditTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D218AB8243ABFAB00DDDDF9 /* EditTask.swift */; };
 		8D218ABB243AC73D00DDDDF9 /* ViewTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D218ABA243AC73D00DDDDF9 /* ViewTask.swift */; };
+		8DEC21D22454DAF800EDBCAD /* savedata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC21D12454DAF800EDBCAD /* savedata.swift */; };
 		E2A2F00F23E0C524003E71AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A2F00E23E0C524003E71AD /* AppDelegate.swift */; };
 		E2A2F01123E0C524003E71AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A2F01023E0C524003E71AD /* SceneDelegate.swift */; };
 		E2A2F01623E0C524003E71AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2A2F01423E0C524003E71AD /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 		8D218AB5243A3CF100DDDDF9 /* To-Do List.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "To-Do List.entitlements"; sourceTree = "<group>"; };
 		8D218AB8243ABFAB00DDDDF9 /* EditTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTask.swift; sourceTree = "<group>"; };
 		8D218ABA243AC73D00DDDDF9 /* ViewTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTask.swift; sourceTree = "<group>"; };
+		8DEC21D12454DAF800EDBCAD /* savedata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = savedata.swift; sourceTree = "<group>"; };
 		E2A2F00B23E0C524003E71AD /* The Amazing List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Amazing List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A2F00E23E0C524003E71AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2A2F01023E0C524003E71AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				E2A2F00E23E0C524003E71AD /* AppDelegate.swift */,
 				E2A2F01023E0C524003E71AD /* SceneDelegate.swift */,
 				E2A2F04423E21CCE003E71AD /* TaskListViewController.swift */,
+				8DEC21D12454DAF800EDBCAD /* savedata.swift */,
 				E2A2F04623E220C2003E71AD /* AddTask.swift */,
 				E2A2F01423E0C524003E71AD /* Main.storyboard */,
 				E2A2F01723E0C529003E71AD /* Assets.xcassets */,
@@ -159,6 +162,7 @@
 				E2A2F04723E220C2003E71AD /* AddTask.swift in Sources */,
 				E2A2F00F23E0C524003E71AD /* AppDelegate.swift in Sources */,
 				E2A2F04523E21CCE003E71AD /* TaskListViewController.swift in Sources */,
+				8DEC21D22454DAF800EDBCAD /* savedata.swift in Sources */,
 				E2A2F01123E0C524003E71AD /* SceneDelegate.swift in Sources */,
 				8D218ABB243AC73D00DDDDF9 /* ViewTask.swift in Sources */,
 			);

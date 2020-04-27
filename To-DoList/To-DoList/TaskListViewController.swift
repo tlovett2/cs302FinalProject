@@ -10,6 +10,20 @@ extension Int: Sequence {
     }
 }
 
+//------- added struct --------
+struct save_task : Codable {
+    var task = ""
+    var com_date = ""
+    var rem_date = ""
+    var completed = false
+    var com_percent = 0
+    var index = 0
+    var hidden = false
+    var seg = 0
+    var prevseg = 0
+}
+
+//--------
 
 //This is our main task class for this screen view
 struct aTask {
@@ -47,6 +61,8 @@ struct aTask {
     var cell: UITableViewCell?
 }
 
+var tasks_global = [aTask]()
+var tasks_save_global = [save_task]()
 
 //This is the main page that you enter when the app starts up
 //This class contains everything that happens in this scene including transitions to/from this scene as well as changing the list that the task is on
@@ -74,6 +90,8 @@ class TaskListViewController: UITableViewController {
     var TBV = UITableView()
     //This is the name of the new task list when adding a new section
     var new_seg: String?
+    
+    var first_time = true
     
     //New Stuff with segment
     
@@ -200,7 +218,7 @@ class TaskListViewController: UITableViewController {
             tasks.append(t)
             tableView.reloadData()
         }
-        
+        tasks_global = tasks
     }
     
     //Gets the indexPath so we can use it in the prepare function and access elements in the table
@@ -273,10 +291,28 @@ class TaskListViewController: UITableViewController {
         
         Files.sizeToFit()
         
-        tasks = []
+        if tasks_save_global.count > 0 && first_time == true {
+            print("jere")
+            var tsk = aTask();
+            for i in tasks_save_global.count {
+                tsk.task = tasks_save_global[i].task
+                tsk.com_date = tasks_save_global[i].com_date
+                tsk.rem_date = tasks_save_global[i].rem_date
+                tsk.com_percent = tasks_save_global[i].com_percent
+                tsk.completed = tasks_save_global[i].completed
+                tsk.hidden = tasks_save_global[i].hidden
+                tsk.index = tasks_save_global[i].index
+                tsk.seg = tasks_save_global[i].seg
+                tsk.prevseg = tasks_save_global[i].prevseg
+                tasks.append(tsk)
+            }
+            first_time = false
+            tasks_save_global.removeAll()
+        }
+        else {
+            tasks = []
+        }
     }
-    
-    
     
     
     //This is the number of sections in the table
@@ -300,6 +336,9 @@ class TaskListViewController: UITableViewController {
         //This links the cell to the task's cell member variable
         tasks[indexPath.row].cell = cell
         TBV = tableView
+        
+        tasks_global = tasks
+        
         //returns the cell to the table
         return cell
     }
@@ -360,7 +399,7 @@ class TaskListViewController: UITableViewController {
             //Deletes the row from the table
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-            
+            tasks_global = tasks
             
         } else if editingStyle == .insert {
             //We inserted in another place
@@ -387,6 +426,8 @@ class TaskListViewController: UITableViewController {
                 self.tasks.remove(at: index.row)
                 self.TBV.cellForRow(at: index)?.backgroundColor = UIColor(named: "customControlColor")
                 self.TBV.deleteRows(at: [index], with: .fade)
+                
+                tasks_global = self.tasks
                 
             }))
         }
@@ -467,6 +508,10 @@ class TaskListViewController: UITableViewController {
         
     }
     
+    //--load data---
+    private func loaddata() {
+        
+    }
 
     
 }

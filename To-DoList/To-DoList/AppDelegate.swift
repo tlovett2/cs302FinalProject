@@ -14,6 +14,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //added------
+        
+        if let encoded = UserDefaults.standard.object(forKey: "array") as? Data {
+            let storedPlayer = try! PropertyListDecoder().decode([save_task].self, from: encoded)
+            tasks_save_global = storedPlayer
+            if tasks_save_global.count > 0 {
+                print(tasks_save_global.count)
+                print(tasks_save_global[0].task)
+            }
+            UserDefaults.standard.removeObject(forKey: "array")
+        }
+        //----
+        
         return true
     }
 
@@ -32,18 +46,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     //added
-        func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+    func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool {
         print("AppDelegate shouldSaveApplicationState")
-
         return true
     }
-
-    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+    func application(_ application: UIApplication, shouldRestoreSecureApplicationState coder: NSCoder) -> Bool {
         print("AppDelegate shouldRestoreApplicationState")
-
         return true
+    }
+    //
+    func applicationWillTerminate(_ application: UIApplication) {
+        var t: [save_task]
+        if tasks_global.count != 0 {
+            t = savedata(tasks: tasks_global)
+
+            try? UserDefaults.standard.set(PropertyListEncoder().encode(t), forKey: "array")
+        }
     }
     
-    //
 }
 
