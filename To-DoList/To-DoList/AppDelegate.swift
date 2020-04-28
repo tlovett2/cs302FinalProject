@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         app = application
         
-        //added------
-        
+        //check in memory if instances exist of "array" or "name_seg" and if they do exist
+        //get the memory assign it to variables and deallocate the memory space
         if let encoded = UserDefaults.standard.object(forKey: "array") as? Data {
             let storedPlayer = try! PropertyListDecoder().decode([save_task].self, from: encoded)
             tasks_save_global = storedPlayer
@@ -33,9 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             name_segs = storedPlayer
             UserDefaults.standard.removeObject(forKey: "name_segs")
         }
-        //----
         
         if #available(iOS 13.0, *) {
+            //works to keep track of when the app enters the background
             NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(willGoActive), name: UIScene.willEnterForegroundNotification, object: nil)
         } else {
@@ -71,7 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    //added
     func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool {
         print("AppDelegate shouldSaveApplicationState")
         
@@ -82,19 +81,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("AppDelegate shouldRestoreApplicationState")
         return true
     }
-    //
+    
     func savetheData(_ application: UIApplication) {
-        //if (1) {
-            var t: [save_task]
-            if tasks_global.count != 0 {
-                t = savedata(tasks: tasks_global)
+        //saves data so in the event the app is terminated everything will be saved
+        var t: [save_task]
+        if tasks_global.count != 0 {
+            t = savedata(tasks: tasks_global)
 
-                try? UserDefaults.standard.set(PropertyListEncoder().encode(t), forKey: "array")
-            }
-            if name_segs.count > 0 {
-                try? UserDefaults.standard.set(PropertyListEncoder().encode(name_segs), forKey: "name_segs")
-            }
-        //}
+            try? UserDefaults.standard.set(PropertyListEncoder().encode(t), forKey: "array")
+        }
+        if name_segs.count > 0 {
+            try? UserDefaults.standard.set(PropertyListEncoder().encode(name_segs), forKey: "name_segs")
+        }
     }
 
     

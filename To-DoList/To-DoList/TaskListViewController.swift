@@ -291,7 +291,7 @@ class TaskListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        //if there has been data saved reload it by checking global variables
         if tasks_save_global.count > 0 && first_time == true {
             print("jere")
             var tsk = aTask();
@@ -320,6 +320,7 @@ class TaskListViewController: UITableViewController {
             tasks = []
         }
         
+        //if segs are in memory recreate them
         if name_segs.count > 0 {
             Files.removeAllSegments()
             Files.insertSegment(withTitle: "Tasks", at: 0, animated: true)
