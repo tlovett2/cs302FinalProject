@@ -10,7 +10,7 @@ extension Int: Sequence {
     }
 }
 
-//------- added struct --------
+//------- Struct for saving data --------
 struct save_task : Codable {
     var task = ""
     var com_date = ""
@@ -23,7 +23,6 @@ struct save_task : Codable {
     var prevseg = 0
 }
 
-//--------
 
 //This is our main task class for this screen view
 struct aTask {
@@ -61,8 +60,12 @@ struct aTask {
     var cell: UITableViewCell?
 }
 
+//global variables that help with saving state
 var tasks_global = [aTask]()
 var tasks_save_global = [save_task]()
+var name_segs = [String]()
+var cur_seg = 0
+
 
 //This is the main page that you enter when the app starts up
 //This class contains everything that happens in this scene including transitions to/from this scene as well as changing the list that the task is on
@@ -93,7 +96,7 @@ class TaskListViewController: UITableViewController {
     
     var first_time = true
     
-    //New Stuff with segment
+    //Allows for segments to be added
     
     @IBOutlet weak var Files: UISegmentedControl!
     @IBAction func change_Tab(_ sender: Any) {
@@ -117,10 +120,9 @@ class TaskListViewController: UITableViewController {
         }
         //Reloads the table so that it removes the cells we just marked as hidden
         TBV.reloadData()
-        
+        cur_seg = Files.selectedSegmentIndex
     }
     
-    //--------------
     
     //This method hides the cells by setting their heights to zero
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -289,7 +291,6 @@ class TaskListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Files.sizeToFit()
         
         if tasks_save_global.count > 0 && first_time == true {
             print("jere")
@@ -300,9 +301,15 @@ class TaskListViewController: UITableViewController {
                 tsk.rem_date = tasks_save_global[i].rem_date
                 tsk.com_percent = tasks_save_global[i].com_percent
                 tsk.completed = tasks_save_global[i].completed
-                tsk.hidden = tasks_save_global[i].hidden
                 tsk.index = tasks_save_global[i].index
                 tsk.seg = tasks_save_global[i].seg
+                
+                if tsk.seg == 0 {
+                    tsk.hidden = false
+                }
+                else {
+                    tsk.hidden = true
+                }
                 tsk.prevseg = tasks_save_global[i].prevseg
                 tasks.append(tsk)
             }
@@ -312,6 +319,21 @@ class TaskListViewController: UITableViewController {
         else {
             tasks = []
         }
+        
+        if name_segs.count > 0 {
+            Files.removeAllSegments()
+            Files.insertSegment(withTitle: "Tasks", at: 0, animated: true)
+            Files.insertSegment(withTitle: "Completed", at: 1, animated: true)
+            for i in  name_segs.count {
+                Files.insertSegment(withTitle: name_segs[i], at: i + 2, animated: true)
+            }
+            Files.selectedSegmentIndex = 0
+            Files.sizeToFit()
+        }
+        else {
+            Files.sizeToFit()
+        }
+        
     }
     
     
@@ -459,6 +481,7 @@ class TaskListViewController: UITableViewController {
             if let name = alert.textFields?.first?.text {
                 self.addSection(self, seg: name)
             }
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { action in
@@ -475,7 +498,8 @@ class TaskListViewController: UITableViewController {
     
     //Adds a section to the segmented controller
     @IBAction func addSection(_ sender: Any, seg: String) {
-        Files.insertSegment(withTitle: seg, at: Files.numberOfSegments, animated: true)        
+        Files.insertSegment(withTitle: seg, at: Files.numberOfSegments, animated: true)
+        name_segs.append(seg)
     }
     
     @IBAction func deleteSection(_ sender: Any, seg: String) {
@@ -484,6 +508,7 @@ class TaskListViewController: UITableViewController {
             let s = Files.titleForSegment(at: i)
             if s == seg {
                 seg_index = i
+                name_segs.remove(at: i - 2)
                 break
             }
         }
@@ -494,6 +519,7 @@ class TaskListViewController: UITableViewController {
             while i < tasks.count {
                 if tasks[i].seg == seg_index {
                     tasks.remove(at: i)
+                    tasks.reserveCapacity(tasks.count)
                 }
                 else {
                     i += 1
@@ -503,15 +529,10 @@ class TaskListViewController: UITableViewController {
             print("section removed")
             TBV.reloadData()
             Files.selectedSegmentIndex = seg_index - 1
+            cur_seg = Files.selectedSegmentIndex
+            tasks_global = tasks
         }
-        
-        
-    }
-    
-    //--load data---
-    private func loaddata() {
         
     }
 
-    
 }

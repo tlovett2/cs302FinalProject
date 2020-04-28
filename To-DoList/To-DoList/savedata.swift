@@ -27,25 +27,3 @@ func savedata (tasks: [aTask]) -> [save_task] {
     
     return ST
 }
-
-//class saveTasks: NSObject, NSCoding {
-//
-//    var t = [save_task]()
-//
-//
-//    init(t: [save_task]) {
-//        self.t = t
-//    }
-//
-//    //MARK: NSCoding
-//    func encode(with coder: NSCoder) {
-//        coder.encode(t, forKey: "array")
-//    }
-//
-//    required convenience init?(coder: NSCoder) {
-//        let t = coder.decodeObject(forKey: "array") as! [save_task]
-//        self.init(t: t)
-//    }
-//
-//
-//}
