@@ -362,6 +362,8 @@ class TaskListViewController: UITableViewController {
         
         tasks_global = tasks
         
+        cell.backgroundColor = (tasks[indexPath.row].completed) ? UIColor.systemGreen : UIColor(named: "customControlColor")
+        
         //returns the cell to the table
         return cell
     }
