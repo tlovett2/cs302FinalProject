@@ -137,6 +137,13 @@ class ViewTask: UIViewController {
         FileSelect.apportionsSegmentWidthsByContent = true
         //Positions the segmented controlelr
         FileSelect.frame.origin = CGPoint(x: screenWidth/2 - (FileSelect.bounds.size.width / 2), y: FileSelect.frame.origin.y)
+        
+        
+        //allows for swiping back to main page
+        let exitSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipe(theSwipe:)))
+        exitSwipe.direction = UISwipeGestureRecognizer.Direction.right
+        exitSwipe.numberOfTouchesRequired = 1
+        self.view.addGestureRecognizer(exitSwipe)
     }
    
     //This is used to send data
@@ -262,7 +269,10 @@ class ViewTask: UIViewController {
             hidden = true
         }
     }
-    
-    
 }
 
+extension UIViewController {
+    @objc func swipe(theSwipe: UISwipeGestureRecognizer) {
+        performSegue(withIdentifier: "donewithView", sender: self)
+    }
+}
