@@ -95,7 +95,7 @@ class ViewTask: UIViewController {
         status.text = (completed ? "Completed" : "Incomplete")
         status.sizeToFit();
         // Sets the position of the completed text
-        status.frame.origin = CGPoint(x: screenWidth/2 - (thetask.bounds.size.width / 2), y: status.frame.origin.y)
+        status.frame.origin = CGPoint(x: screenWidth/2 - (status.bounds.size.width / 2), y: status.frame.origin.y)
         
         //Sets the date of completion text and location
         doc.text = com_date

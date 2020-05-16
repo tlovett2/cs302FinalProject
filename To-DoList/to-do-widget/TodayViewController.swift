@@ -64,7 +64,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         }
         
     }
-    
+    /*
     
     // MARK: - Content container protocol
 
@@ -138,5 +138,5 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
                return weatherForecastData.count
            }
        }
-    
+    */
 }

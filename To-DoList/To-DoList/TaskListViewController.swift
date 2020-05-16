@@ -293,7 +293,7 @@ class TaskListViewController: UITableViewController {
         
         //if there has been data saved reload it by checking global variables
         if tasks_save_global.count > 0 && first_time == true {
-            print("jere")
+            
             var tsk = aTask();
             for i in tasks_save_global.count {
                 tsk.task = tasks_save_global[i].task
@@ -335,6 +335,19 @@ class TaskListViewController: UITableViewController {
             Files.sizeToFit()
         }
         
+
+        let lswipe = UISwipeGestureRecognizer(target: self, action: #selector(filechange(theswipe:)))
+        lswipe.direction = UISwipeGestureRecognizer.Direction.left
+        lswipe.numberOfTouchesRequired = 1
+        self.view.addGestureRecognizer(lswipe)
+        lswipe.name = "left"
+
+        let rswipe = UISwipeGestureRecognizer(target: self, action: #selector(filechange(theswipe:)))
+        rswipe.direction = UISwipeGestureRecognizer.Direction.right
+        rswipe.numberOfTouchesRequired = 1
+        self.view.addGestureRecognizer(rswipe)
+        rswipe.name = "right"
+
     }
     
     
@@ -538,4 +551,18 @@ class TaskListViewController: UITableViewController {
         
     }
 
+    @objc func filechange(theswipe: UISwipeGestureRecognizer) {
+        if theswipe.name == "left" {
+            if Files.selectedSegmentIndex < Files.numberOfSegments - 1 {
+                Files.selectedSegmentIndex = Files.selectedSegmentIndex + 1;
+            }
+        }
+        if theswipe.name == "right" {
+            if Files.selectedSegmentIndex > 0 {
+                Files.selectedSegmentIndex = Files.selectedSegmentIndex - 1
+            }
+        }
+        change_Tab(self)
+    }
+    
 }
